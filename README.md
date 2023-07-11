@@ -22,8 +22,8 @@ npm run serve
 
 ##### Dashboard - Logged in
 
-![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/dashboard?raw=true)
+![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/dashboard.png?raw=true)
 
 ##### Dashboard - Default
 
-![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/dashboard2?raw=true)
+![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/dashboard2.png?raw=true)
