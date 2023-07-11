@@ -1,9 +1,9 @@
 <template>
     <form class="login-form" @submit.prevent="checkLogin">
         <h1>Login</h1>
-        <input v-model="username" placeholder="Username" required />
+        <input v-model="state.username" placeholder="Username" required />
         <input
-            v-model="password"
+            v-model="state.password"
             type="password"
             placeholder="Password"
             required
@@ -15,36 +15,44 @@
 
 <script>
 import axios from "axios";
+import { reactive } from "vue";
+import { useCookies } from "vue3-cookies";
+import { notify } from "@kyvg/vue3-notification";
 
 export default {
     name: "LoginPage",
-    props: {},
-    data() {
-        return {
+    setup() {
+        const state = reactive({
             username: "",
             password: "",
-        };
-    },
-    methods: {
-        checkLogin: function () {
+        });
+
+        const { cookies } = useCookies();
+
+        const checkLogin = () => {
             axios
                 .post("http://localhost:8081/users/login", {
-                    username: this.username,
-                    password: this.password,
+                    username: state.username,
+                    password: state.password,
                 })
                 .then((res) => {
-                    this.$cookies.set("accessToken", res.data.accessToken);
-                    this.$cookies.set("username", res.data.user.username);
+                    cookies.set("accessToken", res.data.accessToken);
+                    cookies.set("username", res.data.user.username);
                     window.open("http://localhost:8080", "_self");
                 })
                 .catch((err) => {
                     console.log("err: ", err);
-                    this.$notify({
-                        title: "Login failed!",
+                    notify({
+                        title: "Login failed",
                         type: "error",
                     });
                 });
-        },
+        };
+
+        return {
+            state,
+            checkLogin,
+        };
     },
 };
 </script>

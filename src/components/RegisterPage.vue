@@ -1,15 +1,15 @@
 <template>
     <form class="register-form" @submit.prevent="register">
         <h1>Register</h1>
-        <input v-model="username" placeholder="Username" required />
+        <input v-model="state.username" placeholder="Username" required />
         <input
-            v-model="password"
+            v-model="state.password"
             type="password"
             placeholder="Password"
             required
         />
         <input
-            v-model="refillPassword"
+            v-model="state.refillPassword"
             type="password"
             placeholder="Refill password"
             required
@@ -21,21 +21,21 @@
 
 <script>
 import axios from "axios";
+import { reactive } from "vue";
+import { notify } from "@kyvg/vue3-notification";
 
 export default {
     name: "RegisterPage",
-    data() {
-        return {
+    setup() {
+        const state = reactive({
             username: "",
             password: "",
             refillPassword: "",
-        };
-    },
-    props: {},
-    methods: {
-        register: function () {
-            if (this.password !== this.refillPassword) {
-                this.$notify({
+        });
+
+        const register = () => {
+            if (state.password !== state.refillPassword) {
+                notify({
                     title: "Password is not matched",
                     type: "error",
                 });
@@ -44,30 +44,33 @@ export default {
 
             axios
                 .post("http://localhost:8081/users/register", {
-                    username: this.username,
-                    password: this.password,
+                    username: state.username,
+                    password: state.password,
                 })
                 .then((res) => {
                     console.log("res: ", res);
-                    this.$notify({
+                    notify({
                         title: "Register successfully!",
                         type: "success",
                     });
-                    this.username = "";
-                    this.password = "";
-                    this.refillPassword = "";
+
                     setTimeout(function () {
                         window.open("http://localhost:8080/login", "_self");
                     }, 2000);
                 })
                 .catch((err) => {
                     console.log("err: ", err);
-                    this.$notify({
+                    notify({
                         title: "Register failed!",
                         type: "error",
                     });
                 });
-        },
+        };
+
+        return {
+            state,
+            register,
+        };
     },
 };
 </script>

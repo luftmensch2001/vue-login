@@ -3,7 +3,7 @@
         <h1 v-if="username">Hello {{ username }}</h1>
         <h1 v-else>Please Login</h1>
         <router-link to="/login">
-            <button @click="clearCookies">
+            <button>
                 {{ username ? "Logout" : "Login" }}
             </button>
         </router-link>
@@ -11,27 +11,33 @@
 </template>
 
 <script>
+import { ref, onBeforeUnmount, onMounted } from "vue";
+import { useCookies } from "vue3-cookies";
+import { notify } from "@kyvg/vue3-notification";
+
 export default {
     name: "DashboardPage",
-    props: {},
-    data() {
+    setup() {
+        const { cookies } = useCookies();
+
+        const username = ref(cookies.get("username"));
+
+        onBeforeUnmount(() => {
+            cookies.remove("username");
+            cookies.remove("accessToken");
+        });
+
+        onMounted(() => {
+            if (username.value) {
+                notify({
+                    title: "Login successfully",
+                    type: "success",
+                });
+            }
+        });
         return {
-            username: this.$cookies.get("username"),
+            username,
         };
-    },
-    methods: {
-        clearCookies: function () {
-            this.$cookies.remove("username");
-            this.$cookies.remove("accessToken");
-        },
-    },
-    mounted: function () {
-        if (this.$cookies.get("username")) {
-            this.$notify({
-                title: "Login successfully!",
-                type: "success",
-            });
-        }
     },
 };
 </script>
