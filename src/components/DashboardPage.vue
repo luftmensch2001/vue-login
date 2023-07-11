@@ -3,7 +3,7 @@
         <h1 v-if="username">Hello {{ username }}</h1>
         <h1 v-else>Please Login</h1>
         <router-link to="/login">
-            <button>
+            <button @click="clearCookies">
                 {{ username ? "Logout" : "Login" }}
             </button>
         </router-link>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { ref, onBeforeUnmount, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { useCookies } from "vue3-cookies";
 import { notify } from "@kyvg/vue3-notification";
 
@@ -22,10 +22,10 @@ export default {
 
         const username = ref(cookies.get("username"));
 
-        onBeforeUnmount(() => {
+        const clearCookies = () => {
             cookies.remove("username");
             cookies.remove("accessToken");
-        });
+        };
 
         onMounted(() => {
             if (username.value) {
@@ -37,6 +37,7 @@ export default {
         });
         return {
             username,
+            clearCookies,
         };
     },
 };
