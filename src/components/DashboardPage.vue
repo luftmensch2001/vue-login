@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard">
         <h1 v-if="username">Hello {{ username }}</h1>
-        <h1 v-else>Not login yet</h1>
+        <h1 v-else>Please Login</h1>
         <router-link to="/login">
             <button @click="clearCookies">
                 {{ username ? "Logout" : "Login" }}
