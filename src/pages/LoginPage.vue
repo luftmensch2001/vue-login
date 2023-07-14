@@ -32,13 +32,23 @@ export default {
         const checkLogin = () => {
             axios
                 .post("http://localhost:8081/users/login", {
-                    username: state.username,
+                    userName: state.username,
                     password: state.password,
                 })
                 .then((res) => {
-                    cookies.set("accessToken", res.data.accessToken);
-                    cookies.set("username", res.data.user.username);
-                    window.open("http://localhost:8080", "_self");
+                    // Login success
+                    if (res.data.user) {
+                        cookies.set("accessToken", res.data.accessToken);
+                        cookies.set("username", res.data.user.username);
+                        window.open("http://localhost:8080", "_self");
+                    }
+                    // Notify error
+                    else {
+                        notify({
+                            title: res.data,
+                            type: "error",
+                        });
+                    }
                 })
                 .catch((err) => {
                     console.log("err: ", err);
@@ -59,5 +69,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import "../assets/styles/style.scss";
+@import "../assets/styles/login-register.scss";
 </style>

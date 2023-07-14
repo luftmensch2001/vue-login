@@ -1,0 +1,104 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .student-filter {
+        margin-top: 100px;
+        table {
+            tr {
+                text-align: left;
+                height: 60px;
+                td {
+                    width: 160px;
+                    .label {
+                        font-weight: bold;
+                    }
+                    input {
+                        width: 300px;
+                        padding: 10px 10px;
+                        font-size: 14px;
+                        border-radius: 6px;
+                        border: 1px solid lightgray;
+                    }
+                    button {
+                        margin-left: 20px;
+                        width: 140px;
+                    }
+                }
+            }
+        }
+    }
+
+    .student-list {
+        margin-top: 60px;
+        width: 100%;
+        border: 1px solid lightgray;
+
+        thead,
+        tr {
+            height: 60px;
+        }
+
+        td {
+            border-top: 1px solid lightgray;
+            font-size: 14px;
+            .buttons {
+                display: flex;
+                gap: 8px;
+                width: fit-content;
+
+                button {
+                    font-size: 12px;
+                }
+
+                .delete-button {
+                    background-color: #f63f2d;
+                }
+            }
+        }
+
+        .edit-col {
+            width: 120px;
+        }
+    }
+}
+
+.pop-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.4);
+    .container {
+        background-color: #fff;
+        width: 400px;
+        max-width: calc(100% - 32px);
+        height: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 32px;
+        border-radius: 16px;
+        align-items: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        animation: modalFadeIn ease 0.4s;
+        .choices {
+            display: flex;
+            gap: 20px;
+            button:first-child {
+                background-color: #ff5353;
+            }
+            button:last-child {
+                background-color: rgb(210, 210, 210);
+                color: #333;
+                border: 1px solid lightgray;
+            }
+        }
+    }
+}

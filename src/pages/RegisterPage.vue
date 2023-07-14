@@ -44,19 +44,28 @@ export default {
 
             axios
                 .post("http://localhost:8081/users/register", {
-                    username: state.username,
+                    userName: state.username,
                     password: state.password,
                 })
                 .then((res) => {
-                    console.log("res: ", res);
-                    notify({
-                        title: "Register successfully!",
-                        type: "success",
-                    });
+                    // Register success
+                    if (res.data.user) {
+                        notify({
+                            title: "Register successfully!",
+                            type: "success",
+                        });
 
-                    setTimeout(function () {
-                        window.open("http://localhost:8080/login", "_self");
-                    }, 2000);
+                        setTimeout(function () {
+                            window.open("http://localhost:8080/login", "_self");
+                        }, 2000);
+                    }
+                    // Error
+                    else {
+                        notify({
+                            title: res.data,
+                            type: "error",
+                        });
+                    }
                 })
                 .catch((err) => {
                     console.log("err: ", err);
@@ -77,5 +86,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-@import "../assets/styles/style.scss";
+@import "../assets/styles/login-register.scss";
 </style>

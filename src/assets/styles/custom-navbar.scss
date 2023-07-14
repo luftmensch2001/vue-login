@@ -1,0 +1,20 @@
+.custom-navbar {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+        width: 250px;
+    }
+
+    .account {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        span {
+            font-weight: bold;
+        }
+    }
+}

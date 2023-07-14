@@ -1,22 +1,17 @@
 <template>
+    <custom-navbar />
     <router-view></router-view>
     <notifications position="bottom right" />
 </template>
 
 <script>
+import CustomNavbar from "./components/CustomNavbar.vue";
 export default {
     name: "App",
-    components: {},
+    components: { CustomNavbar },
 };
 </script>
 
 <style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 160px;
-}
+@import "./assets/styles/global.css";
 </style>
