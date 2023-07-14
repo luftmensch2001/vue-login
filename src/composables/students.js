@@ -5,6 +5,10 @@ import { useCookies } from "vue3-cookies";
 
 export default function useStudents() {
     const students = ref([]);
+    const showStudents = ref([]);
+    const countOfPages = ref(1);
+    const currentPage = ref(1);
+    const LIMIT = 10;
 
     const { cookies } = useCookies();
     const token = cookies.get("accessToken");
@@ -31,6 +35,9 @@ export default function useStudents() {
                         student.dateOfBirth = dateFormatted;
                     }
                 });
+                countOfPages.value = Math.floor(students.value.length / LIMIT);
+                if (students.value.length % LIMIT) countOfPages.value++;
+                goToPage(1);
             })
             .catch((err) => {
                 console.log("err: ", err);
@@ -222,13 +229,24 @@ export default function useStudents() {
             });
     };
 
+    const goToPage = (pageNumber) => {
+        currentPage.value = pageNumber;
+        showStudents.value = students.value.slice(
+            (currentPage.value - 1) * LIMIT,
+            currentPage.value * LIMIT
+        );
+    };
+
     return {
-        students,
+        showStudents,
+        countOfPages,
+        currentPage,
         getStudents,
         generateCode,
         addStudent,
         updateStudent,
         getStudentById,
         deleteStudent,
+        goToPage,
     };
 }

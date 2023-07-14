@@ -47,7 +47,7 @@
                 <th>Score</th>
                 <th>Edit</th>
             </thead>
-            <tr v-for="student in students" :key="student.studentId">
+            <tr v-for="student in showStudents" :key="student.studentId">
                 <td>
                     {{ student.studentId }}
                 </td>
@@ -83,6 +83,26 @@
                 </td>
             </tr>
         </table>
+        <div class="pagination">
+            <div class="left">
+                <button>First</button>
+                <button>Prev</button>
+            </div>
+            <div class="pages">
+                <button
+                    v-for="pageNumber in countOfPages"
+                    :key="pageNumber"
+                    :class="{ active: pageNumber == currentPage }"
+                    @click="goToPage(pageNumber)"
+                >
+                    {{ pageNumber }}
+                </button>
+            </div>
+            <div class="right">
+                <button>Next</button>
+                <button>Last</button>
+            </div>
+        </div>
     </div>
     <div class="pop-up" v-if="showPopUp">
         <div class="container">
@@ -102,7 +122,14 @@ import { onMounted, reactive, ref } from "vue";
 export default {
     name: "DashboardPage",
     setup() {
-        const { students, getStudents, deleteStudent } = useStudents();
+        const {
+            showStudents,
+            countOfPages,
+            currentPage,
+            goToPage,
+            getStudents,
+            deleteStudent,
+        } = useStudents();
 
         const showPopUp = ref(false);
 
@@ -137,9 +164,12 @@ export default {
         };
 
         return {
-            students,
+            showStudents,
             filter,
             showPopUp,
+            countOfPages,
+            currentPage,
+            goToPage,
             onDeleteClick,
             onConfirmDelete,
             filterStudents,
