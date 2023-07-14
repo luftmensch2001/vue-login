@@ -1,4 +1,4 @@
-# Login App (Vuejs + Spring boot)
+# Student Management App (Vuejs + Spring boot)
 
 ## Project setup
 
