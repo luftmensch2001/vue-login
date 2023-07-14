@@ -1,5 +1,7 @@
 <template>
-    <custom-navbar />
+    <custom-navbar
+        v-if="this.$route.path !== '/login' && this.$route.path !== '/register'"
+    />
     <router-view></router-view>
     <notifications position="bottom right" />
 </template>
