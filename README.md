@@ -20,10 +20,18 @@ npm run serve
 
 ![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/register.png?raw=true)
 
-##### Dashboard - Logged in
+##### Dashboard
 
 ![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/dashboard.png?raw=true)
 
-##### Dashboard - Default
+##### Delete student
 
-![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/dashboard2.png?raw=true)
+![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/delete.png?raw=true)
+
+##### Add student
+
+![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/add.png?raw=true)
+
+##### Update student
+
+![](https://github.com/luftmensch2001/vue-login/blob/main/src/assets/images/screenshots/update.png?raw=true)
