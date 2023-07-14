@@ -125,7 +125,6 @@ export default {
                     if (month < 10) month = "0" + month;
                     if (day < 10) day = "0" + day;
                     student.dateOfBirth = `${year}-${month}-${day}`;
-                    console.log("student.dateOfBirth: ", student.dateOfBirth);
                 }
             });
         });
